@@ -25,11 +25,9 @@ ff=fromJSON(content(file,as="text", encoding = "UTF-8"))
 
 organizations=ff$body$organizations
 
-load("C:/Users/admin/Documents/gitHub/private/VPP/PP_details.rda")
-
 row2=1
 
-for (row2 in 16:nrow(organizations)) {
+for (row2 in 1:nrow(organizations)) {
   #UEVCB by Org.
   url <- "http://gateway.santraltakip.com/seffaflik/transparency/production/dpp-injection-unit-name"
   file=GET(url = paste0(url,"?organizationEIC=",organizations$organizationETSOCode[row2]), add_headers(.headers=c("x-ibm-client-id"= "1f9e3bd7-de7c-4eb0-baa1-74257e22df93",Accept="application/json")))
@@ -50,9 +48,9 @@ for (row2 in 16:nrow(organizations)) {
   }
 }
 
-save(orgPP,file = "org&eic.rda")
+load("org&eic.rda")
 
-plantList=read.xlsx("C:/Users/admin/Documents/windProductionClient/windProductionClient/windProductionClient/2019-08-09clusterSim_AB_V1.0.xlsx",sheetName = "planList",encoding = "UTF-8")
+plantList=read.xlsx("2019-08-09clusterSim_AB_V1.0.xlsx",sheetName = "planList",encoding = "UTF-8")
 plantDetail=read.csv("injectionUnitDetail.csv",sep = ";",dec = ",")
 
 # PP Info
